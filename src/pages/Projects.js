@@ -15,15 +15,15 @@ function Projects() {
     {
       id: 2,
       name: "LivePlay",
-      description: "A cool project that does amazing things. Built with React and modern web technologies.",
+      description: "Real-time custom trivia games for live sporting events.",
       image: "/assets/ProjectPhotos/LivePlay.png",
-      link: "https://example.com",
+      link: "https://danielwuv1.vercel.app/#/projects/liveplay",
       caseStudyLink: "/projects/liveplay"
     },
     {
       id: 3,
       name: "Navigait",
-      description: "An innovative solution to a complex problem. Features cutting-edge design and functionality.",
+      description: "Cursor for Onboarding. Live multi-modal assistant to fill in gaps in technical documentation",
       image: "/assets/ProjectPhotos/Navigait.png",
       link: "https://devpost.com/software/navigait"
     }
