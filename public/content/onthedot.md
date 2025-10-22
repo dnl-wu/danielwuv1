@@ -1,6 +1,8 @@
 # Shipping an NYT-Inspired Game, and Going Viral on Social Media
 ![OnTheDot.png](https://github.com/Profilist/on-the-dot/blob/main/public/OnTheDot.png?raw=true)
 
+If you'd like to try the game before the read -> http://playonthedot.com
+
 Midterm season was rough... Little sleep, endless studying, and no energy to start the day. The one thing that got me up was playing the _New York Times Mini Crossword_ and _Connections._
 
 If there was one thing that bothered me about those games, it was how often they relied on  niche knowledge I didn’t have.  
