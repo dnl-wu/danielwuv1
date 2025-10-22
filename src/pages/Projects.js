@@ -23,7 +23,7 @@ function Projects() {
     {
       id: 3,
       name: "Navigait",
-      description: "Cursor for Onboarding. Live multi-modal assistant to fill in gaps in technical documentation",
+      description: "Cursor for Onboarding. Live multi-modal assistant to fill in gaps in technical documentation.",
       image: "/assets/ProjectPhotos/Navigait.png",
       link: "https://devpost.com/software/navigait"
     }
