@@ -1,0 +1,76 @@
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("../../fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("../../fonts/Libre_Baskerville/LibreBaskerville-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../../fonts/Inter/Inter_18pt-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../../fonts/Inter/Inter_18pt-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.cursive-title {
+  font-family: "Inter", sans-serif;
+  font-size: 8rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: 1.25rem;
+}
+
+/* Navigation specific styles */
+.nav-container {
+  margin: 1rem 3rem;
+  text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+}
+
+.nav-link {
+  font-family: "Inter", sans-serif;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #deb4c1;
+}
+
+.nav-link.active {
+  text-decoration: underline;
+}
+
+.nav-separator {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav-separator {
+    display: inline;
+  }
+}
