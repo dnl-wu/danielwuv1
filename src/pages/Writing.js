@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
+import './Writing.css';
 
 function Writing() {
   const posts = [
@@ -15,36 +16,10 @@ function Writing() {
   ];
 
   return (
-    <div style={{ 
-      height: '100vh', 
-      display: 'flex',
-      flexDirection: 'column'
-    }}>
-      <div style={{ 
-        padding: '2rem 2rem 1rem 2rem',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '3rem',
-          padding: '0.5rem 0', 
-          width: '100%',
-          maxWidth: '36rem'
-        }}>
-          <ul style={{ 
-            display: 'flex', 
-            gap: '0.5rem', 
-            listStyle: 'none', 
-            padding: 0, 
-            margin: 0, 
-            fontWeight: 'bold',
-            flexWrap: 'wrap',
-            justifyContent: 'center'
-          }}>
+    <div className="writing-container">
+      <div className="writing-nav">
+        <div className="writing-nav-content">
+          <ul className="writing-nav-list">
             <li>
               <NavLink to="/" style={({ isActive }) => ({ 
                 color: '#1a1a1a', 
@@ -93,42 +68,13 @@ function Writing() {
         </div>
       </div>
 
-      <div style={{ 
-        flex: 1,
-        padding: '2rem',
-        display: 'flex',
-        justifyContent: 'center'
-      }}>
-        <ul style={{ 
-          listStyle: 'disc',
-          listStylePosition: 'inside',
-          padding: 0,
-          margin: 0,
-          maxWidth: '800px',
-          width: '100%',
-          textAlign: 'center'
-        }}>
+      <div className="writing-main">
+        <ul className="writing-posts-list">
           {posts.map(({ title, slug }) => (
-            <li key={slug} style={{ 
-              display: 'inline-flex',
-              alignItems: 'center',
-              marginBottom: '1rem',
-              fontFamily: 'Libre Baskerville, serif',
-              listStyle: 'none'
-            }}>
+            <li key={slug} className="writing-post-item">
               <Link 
                 to={`/projects/${slug}`}
-                style={{
-                  color: '#1a1a1a',
-                  textDecoration: 'underline',
-                  textDecorationColor: 'rgba(139, 92, 246, 0.6)',
-                  textDecorationThickness: '2px',
-                  textUnderlineOffset: '4px',
-                  fontSize: '1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem'
-                }}
+                className="writing-post-link"
               >
                 {title}
                 <ExternalLink size={16} style={{ flexShrink: 0 }} />

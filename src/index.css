@@ -9,10 +9,20 @@
   --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-color: #fbfbfd;
   /* Subtle Y2K Gradient Mesh Background */
   background-image: 
@@ -26,6 +36,8 @@ body {
   background-attachment: fixed;
   color: var(--text-primary);
   overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
 }
 
 /* Y2K Grain Overlay */
@@ -39,4 +51,28 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 999;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Improve touch targets */
+  button, a {
+    -webkit-tap-highlight-color: rgba(139, 92, 246, 0.1);
+  }
+}
+
+/* Prevent horizontal scroll on mobile */
+@media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  * {
+    max-width: 100%;
+  }
 }

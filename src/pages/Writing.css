@@ -1,0 +1,139 @@
+/* Writing.css */
+
+.writing-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.writing-nav {
+  padding: 2rem 2rem 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.writing-nav-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 0.5rem 0;
+  width: 100%;
+  max-width: 36rem;
+}
+
+.writing-nav-list {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.writing-main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.writing-posts-list {
+  list-style: disc;
+  list-style-position: inside;
+  padding: 0;
+  margin: 0;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.writing-post-item {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: 'Libre Baskerville', serif;
+  list-style: none;
+}
+
+.writing-post-link {
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-decoration-color: rgba(139, 92, 246, 0.6);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.writing-post-link:hover {
+  color: #8b5cf6;
+  text-decoration-color: rgba(139, 92, 246, 0.8);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .writing-nav {
+    padding: 1.5rem 1rem;
+  }
+
+  .writing-nav-content {
+    gap: 2rem;
+  }
+
+  .writing-nav-list {
+    gap: 0.375rem;
+    font-size: 0.9rem;
+  }
+
+  .writing-main {
+    padding: 1.5rem 1rem;
+  }
+
+  .writing-post-link {
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .writing-nav {
+    padding: 1rem 0.75rem;
+  }
+
+  .writing-nav-content {
+    gap: 1.5rem;
+  }
+
+  .writing-nav-list {
+    gap: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .writing-main {
+    padding: 1rem 0.75rem;
+  }
+
+  .writing-posts-list {
+    text-align: left;
+  }
+
+  .writing-post-item {
+    display: block;
+    margin-bottom: 1.25rem;
+  }
+
+  .writing-post-link {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+}
+

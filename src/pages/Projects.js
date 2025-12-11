@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard/ProjectCard';
+import './Projects.css';
 
 function Projects() {
   const projects = [
@@ -30,56 +31,12 @@ function Projects() {
   ];
   
   return (
-    <div style={{ 
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100vw',
-      height: '100vh',
-      backgroundImage: `
-        linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px)
-      `,
-      backgroundSize: '20px 20px',
-      backgroundPosition: '0 0, 0 0',
-      zIndex: 0,
-      pointerEvents: 'none'
-    }}>
-      <div style={{ 
-        position: 'relative',
-        zIndex: 1,
-        height: '100vh', 
-        display: 'flex',
-        flexDirection: 'column',
-        pointerEvents: 'auto'
-      }}>
-        <div style={{ 
-          padding: '2rem 2rem 1rem 2rem',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: 1
-        }}>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '3rem',
-            padding: '0.5rem 0', 
-            width: '100%',
-            maxWidth: '36rem'
-          }}>
-            <ul style={{ 
-              display: 'flex', 
-              gap: '0.5rem', 
-              listStyle: 'none', 
-              padding: 0, 
-              margin: 0, 
-              fontWeight: 'bold',
-              flexWrap: 'wrap',
-              justifyContent: 'center'
-            }}>
+    <div className="projects-container">
+      <div className="projects-background"></div>
+      <div className="projects-content-wrapper">
+        <div className="projects-nav">
+          <div className="projects-nav-content">
+            <ul className="projects-nav-list">
               <li>
                 <NavLink to="/" style={({ isActive }) => ({ 
                   color: '#1a1a1a', 
@@ -128,25 +85,9 @@ function Projects() {
           </div>
         </div>
 
-        <div style={{ 
-          flex: 1,
-          overflowY: 'auto',
-          padding: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}>
-          <div style={{ 
-            width: '100%',
-            maxWidth: '600px',
-            padding: '2rem 0'
-          }}>
-            <div style={{ 
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2rem',
-              marginTop: '1rem'
-            }}>
+        <div className="projects-main">
+          <div className="projects-list-container">
+            <div className="projects-list">
               {projects.map(project => (
                 <ProjectCard 
                   key={project.id}

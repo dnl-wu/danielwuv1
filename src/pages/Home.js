@@ -172,8 +172,8 @@ function Home() {
         flexDirection: 'column',
         pointerEvents: 'auto'
       }}>
-        <div style={{ 
-          padding: '2rem 2rem 1rem 2rem',
+        <div className="nav-wrapper" style={{ 
+          padding: windowWidth <= 480 ? '1rem 0.75rem' : windowWidth <= 768 ? '1.5rem 1rem' : '2rem 2rem 1rem 2rem',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -247,14 +247,15 @@ function Home() {
           </div>
         </div>
 
-        <div style={{ 
+        <div className="main-content" style={{ 
           flex: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: 0,
+          padding: windowWidth <= 480 ? '0 0.75rem' : windowWidth <= 768 ? '0 1rem' : 0,
           margin: 0,
-          position: 'relative'
+          position: 'relative',
+          marginTop: windowWidth <= 480 ? '0' : windowWidth <= 768 ? '-1rem' : '-2rem'
         }}>
           <div style={{
             position: 'relative',
@@ -263,7 +264,7 @@ function Home() {
             WebkitUserSelect: 'none',
             MozUserSelect: 'none',
             msUserSelect: 'none',
-            marginTop: '-5rem'
+            marginTop: windowWidth <= 480 ? '0' : windowWidth <= 768 ? '-2rem' : '-5rem'
           }}>
             {activeCardId !== null && (
               <div style={{
@@ -275,19 +276,20 @@ function Home() {
                 gap: '0'
               }}>
                 <button
+                  className="carousel-btn"
                   onClick={() => setActiveCardId(getPrevCardId(activeCardId))}
                   style={{
                     background: 'transparent',
                     border: 'none',
                     borderRadius: '50%',
-                    width: '32px',
-                    height: '32px',
+                    width: windowWidth <= 480 ? '36px' : windowWidth <= 768 ? '40px' : '48px',
+                    height: windowWidth <= 480 ? '36px' : windowWidth <= 768 ? '40px' : '48px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
-                    marginRight: '1rem',
+                    marginRight: windowWidth <= 480 ? '0.5rem' : '1rem',
                     opacity: 0.6,
                     zIndex: 3
                   }}
@@ -304,14 +306,15 @@ function Home() {
                 </button>
 
                 <div 
-                  className="feature-card" 
+                  className="feature-card carousel-side-card" 
                   style={{ 
-                    opacity: 0.4, 
+                    opacity: windowWidth <= 768 ? 0 : 0.4, 
                     transform: 'scale(0.85)',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
                     zIndex: 1,
-                    marginRight: getCardMargin()
+                    marginRight: getCardMargin(),
+                    display: windowWidth <= 768 ? 'none' : 'block'
                   }}
                   onClick={() => setActiveCardId(getPrevCardId(activeCardId))}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '0.6'}
@@ -371,14 +374,15 @@ function Home() {
                 </div>
 
                 <div 
-                  className="feature-card" 
+                  className="feature-card carousel-side-card" 
                   style={{ 
-                    opacity: 0.4, 
+                    opacity: windowWidth <= 768 ? 0 : 0.4, 
                     transform: 'scale(0.85)',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
                     zIndex: 1,
-                    marginLeft: getCardMargin()
+                    marginLeft: getCardMargin(),
+                    display: windowWidth <= 768 ? 'none' : 'block'
                   }}
                   onClick={() => setActiveCardId(getNextCardId(activeCardId))}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '0.6'}
@@ -409,19 +413,20 @@ function Home() {
                 </div>
 
                 <button
+                  className="carousel-btn"
                   onClick={() => setActiveCardId(getNextCardId(activeCardId))}
                   style={{
                     background: 'transparent',
                     border: 'none',
                     borderRadius: '50%',
-                    width: '32px',
-                    height: '32px',
+                    width: windowWidth <= 480 ? '36px' : windowWidth <= 768 ? '40px' : '48px',
+                    height: windowWidth <= 480 ? '36px' : windowWidth <= 768 ? '40px' : '48px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
-                    marginLeft: '1rem',
+                    marginLeft: windowWidth <= 480 ? '0.5rem' : '1rem',
                     opacity: 0.6,
                     zIndex: 3
                   }}
@@ -439,14 +444,14 @@ function Home() {
               </div>
             )}
 
-            <h1 style={{
-              fontSize: '4rem',
+            <h1 className="home-hero-title" style={{
+              fontSize: windowWidth <= 480 ? '2rem' : windowWidth <= 768 ? '2.5rem' : '4rem',
               fontWeight: 'bold',
               fontFamily: 'Libre Baskerville, serif',
               color: '#1a1a1a',
               margin: 0,
               padding: 0,
-              letterSpacing: '0.1em',
+              letterSpacing: windowWidth <= 480 ? '0.05em' : '0.1em',
               textShadow: '0 0 20px rgba(139, 92, 246, 0.2)',
               userSelect: 'none',
               WebkitUserSelect: 'none',
@@ -465,10 +470,11 @@ function Home() {
               alignItems: 'center',
                 position: 'relative'
             }}>
-              <div style={{
+              <div className="home-feature-row" style={{
                 display: 'flex',
-                gap: '2rem',
-                alignItems: 'center'
+                gap: windowWidth <= 480 ? '0.5rem' : windowWidth <= 768 ? '0.75rem' : '2rem',
+                alignItems: 'center',
+                flexDirection: windowWidth <= 768 ? 'column' : 'row'
               }}>
                 <FeatureCard 
                   cardId={0}
@@ -531,10 +537,11 @@ function Home() {
                 </FeatureCard>
               </div>
 
-              <div style={{
+              <div className="home-feature-row" style={{
                 display: 'flex',
-                gap: '2rem',
-                alignItems: 'center'
+                gap: windowWidth <= 480 ? '0.5rem' : windowWidth <= 768 ? '0.75rem' : '2rem',
+                alignItems: 'center',
+                flexDirection: windowWidth <= 768 ? 'column' : 'row'
               }}>
                 <FeatureCard 
                   cardId={3}
@@ -598,10 +605,10 @@ function Home() {
               </div>
             </div>
 
-            <div style={{ 
-              marginTop: '2rem',
+            <div className="home-social-links" style={{ 
+              marginTop: windowWidth <= 480 ? '1.5rem' : '2rem',
               display: 'flex', 
-              gap: '1.5rem', 
+              gap: windowWidth <= 480 ? '1rem' : windowWidth <= 768 ? '1.25rem' : '1.5rem', 
               alignItems: 'center', 
               justifyContent: 'center',
               position: 'relative'
