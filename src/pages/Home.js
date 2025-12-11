@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Linkedin, Twitter, Github, Mail, Sparkle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
 import FeatureCard from '../components/FeatureCard/FeatureCard';
+import './Home.css';
 
 function Home() {
   const [activeCardId, setActiveCardId] = useState(1);

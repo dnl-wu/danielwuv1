@@ -1,156 +1,122 @@
 .project-card {
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 12px;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px; /* More rounded Apple style */
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.1);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  transition: all 0.3s ease;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100%;
+  position: relative;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-color: rgba(139, 92, 246, 0.3);
 }
 
 .project-image-container {
   width: 100%;
-  height: 320px;
+  height: 280px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.02);
-  flex-shrink: 0;
+  background: #f5f5f7;
+  position: relative;
 }
 
 .project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.6s var(--ease-apple);
 }
 
 .project-card:hover .project-image {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .project-content {
-  padding: 2rem;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  text-align: left;
+  flex: 1;
 }
 
 .project-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
 }
 
 .project-name {
   font-family: 'Libre Baskerville', serif;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #1a1a1a;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
   margin: 0;
-  letter-spacing: 0.02em;
-  flex: 1;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .project-link {
-  color: #8b5cf6;
+  color: var(--text-secondary);
   transition: all 0.2s ease;
+  padding: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.25rem;
-  border-radius: 4px;
-  flex-shrink: 0;
-  margin-left: 1rem;
 }
 
 .project-link:hover {
-  color: #7c3aed;
-  background: rgba(139, 92, 246, 0.1);
+  color: var(--accent-secondary);
+  background: #fff;
+  transform: rotate(45deg);
 }
 
 .project-description {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  font-size: 0.95rem;
   line-height: 1.6;
-  color: #4a4a4a;
-  margin: 0 0 1rem 0;
-  text-align: left;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 1.5rem 0;
+  font-weight: 400;
 }
 
 .project-case-study-link {
-  font-family: 'Inter', sans-serif;
+  margin-top: auto;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 0.85rem;
-  color: #8b5cf6;
+  font-weight: 600;
+  color: var(--accent-primary);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
-}
-
-.project-case-study-link span {
-  border-bottom: 1px solid #8b5cf6;
-  padding-bottom: 1px;
+  transition: gap 0.2s ease;
+  width: fit-content;
+  padding: 8px 16px;
+  background: rgba(139, 92, 246, 0.08);
+  border-radius: 100px;
 }
 
 .project-case-study-link:hover {
-  color: #7c3aed;
+  gap: 0.75rem;
+  background: rgba(139, 92, 246, 0.15);
 }
 
-.project-case-study-link:hover span {
-  border-bottom-color: #7c3aed;
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .project-card {
-    flex-direction: column;
-    height: auto;
-  }
-  
   .project-image-container {
-    width: 100%;
-    height: 200px;
+    height: 220px;
   }
-  
   .project-content {
-    width: 100%;
     padding: 1.5rem;
-  }
-  
-  .project-name {
-    font-size: 1.1rem;
-  }
-  
-  .project-description {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .project-image-container {
-    height: 180px;
-  }
-  
-  .project-content {
-    padding: 1.25rem;
-  }
-  
-  .project-name {
-    font-size: 1rem;
-  }
-  
-  .project-description {
-    font-size: 0.8rem;
   }
 }
