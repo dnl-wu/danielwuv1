@@ -27,7 +27,7 @@ const experiences = [
     id: 3,
     company: 'Penseum',
     role: 'Product Engineer',
-    dates: 'May 2026 – Aug 2026',
+    dates: 'May 2025 – Aug 2025',
     description: 'Onboarding, Referral Systems',
     logo: '/assets/ExperiencePhotos/Penseum.png',
     url: 'https://penseum.com',
@@ -95,7 +95,7 @@ function Home() {
       <main className="home-container">
         <section className="hero-section">
           <h1 className="hero-name">Hi, I'm Daniel</h1>
-          <p className="hero-subtitle">Computing & Financial Management @ UWaterloo</p>
+          <p className="hero-subtitle"><span className="hero-pill">›  Seeking Summer 2026 Internships!</span></p>
           <p className="hero-bio">
             I build products people use and ideas that spread. I've won 10 hackathons, shipped a
             trivia game to 3k users in under a week, and worked as a Product Engineering Intern. I
