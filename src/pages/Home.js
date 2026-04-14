@@ -1,721 +1,211 @@
-import React, { useEffect, useState } from 'react';
-import { Linkedin, Twitter, Github, Mail, Sparkle, ChevronLeft, ChevronRight } from 'lucide-react';
-import { NavLink, Link } from 'react-router-dom';
-import FeatureCard from '../components/FeatureCard/FeatureCard';
+import React from 'react';
+import { Linkedin, Twitter, Github, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import NavBar from '../components/NavBar/NavBar';
 import './Home.css';
 
+const experiences = [
+  {
+    id: 1,
+    company: 'BrainRidge Consulting',
+    role: 'Software Engineer',
+    dates: 'Jan 2026 – Apr 2026',
+    description: '',
+    logo: '/assets/ExperiencePhotos/BrainRidge.jpeg',
+    url: 'https://pulse.brainridge.ai',
+  },
+  {
+    id: 2,
+    company: 'Telora',
+    role: 'Founder-in-Residence',
+    dates: '2025 – 2026',
+    description: 'Worked with app devs to solve the disconnect between user analytics and UX.',
+    logo: '/assets/ExperiencePhotos/Telora.jpeg',
+    url: 'https://telora.com',
+  },
+  {
+    id: 3,
+    company: 'Penseum',
+    role: 'Product Engineer',
+    dates: 'May 2026 – Aug 2026',
+    description: 'Onboarding, Referral Systems',
+    logo: '/assets/ExperiencePhotos/Penseum.png',
+    url: 'https://penseum.com',
+  },
+];
+
+const featureCards = [
+  {
+    id: 0,
+    content:
+      "I study Computing and Financial Management at the University of Waterloo, where I recently won my cohort's stock pitch competition!",
+    media: '/assets/FeaturePhotos/1.png',
+    mediaType: 'image',
+    label: '2b cs + finance @ uwaterloo',
+  },
+  {
+    id: 1,
+    content:
+      'I was a Product Engineering Intern at Penseum, an EdTech startup, where I owned the user acquisition and onboarding funnels (focused on increasing numbers.)',
+    media: '/assets/FeaturePhotos/2.png',
+    mediaType: 'image',
+    label: 'prev product @ penseum',
+  },
+  {
+    id: 2,
+    content:
+      'I won 10 consecutive hackathons and case competitions by typing fast and building out cool ideas targeted at solving a problem.',
+    media: '/assets/FeaturePhotos/3.png',
+    mediaType: 'image',
+    label: '10x hackathon winner',
+  },
+  {
+    id: 3,
+    content:
+      'NYT Games start my morning workflow, so I thought, why not build one myself! Converted 100k+ impressions on social media → 10k unique visits, and ',
+    linkText: "here's what I did next",
+    linkUrl: '/projects/onthedot',
+    media: '/assets/FeaturePhotos/4.mp4',
+    mediaType: 'video',
+    label: 'shipped a game to 3k users in < 1 week',
+  },
+  {
+    id: 4,
+    content:
+      "Didn't like the existing math events, so I campaigned, won, and pushed my own ideas to 9000+ happy math students.",
+    media: '/assets/FeaturePhotos/5.png',
+    mediaType: 'image',
+    label: 'math faculty rep',
+  },
+  {
+    id: 5,
+    content:
+      'I love playing soccer, basketball, table tennis, ultimate, and more. Would be a great addition to a company sports team.',
+    media: '/assets/FeaturePhotos/6.png',
+    mediaType: 'image',
+    label: 'Varsity Athlete',
+  },
+];
+
 function Home() {
-  const [activeCardId, setActiveCardId] = useState(1);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  
-  const getNextCardId = (currentId) => {
-    return (currentId + 1) % 6;
-  };
-  
-  const getPrevCardId = (currentId) => {
-    return (currentId - 1 + 6) % 6;
-  };
-  
-  const getCardMargin = () => {
-    if (windowWidth > 768) return '-60px';
-    if (windowWidth > 480) return '-45px';
-    return '-30px';
-  };
-  
-  const renderCardContent = (card) => {
-    if (card.linkText && card.linkUrl) {
-      return (
-        <>
-          {card.content}
-          <Link 
-            to={card.linkUrl} 
-            style={{ 
-              color: '#8b5cf6', 
-              textDecoration: 'underline',
-              textDecorationColor: 'rgba(139, 92, 246, 0.4)',
-              textDecorationThickness: '1px',
-              textUnderlineOffset: '2px',
-              fontWeight: 'inherit',
-              fontFamily: 'inherit',
-              transition: 'all 0.2s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#7c3aed';
-              e.currentTarget.style.textDecorationColor = 'rgba(124, 58, 237, 0.6)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#8b5cf6';
-              e.currentTarget.style.textDecorationColor = 'rgba(139, 92, 246, 0.4)';
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {card.linkText}
-          </Link>
-        </>
-      );
-    }
-    return card.content;
-  };
-  
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowLeft') {
-        setActiveCardId(prev => getPrevCardId(prev));
-      } else if (e.key === 'ArrowRight') {
-        setActiveCardId(prev => getNextCardId(prev));
-      }
-    };
-    
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-  
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
-  const featureCards = [
-    {
-      id: 0,
-      content: "I study Computing and Financial Management at the University of Waterloo, where I recently won my cohort's stock pitch competition!",
-      media: "/assets/FeaturePhotos/1.png",
-      mediaType: "image",
-      label: "2a cs + finance @ uwaterloo"
-    },
-    {
-      id: 1,
-      content: "I was a Product Engineering Intern at Penseum, an EdTech startup, where I owned the user aquisition and onboarding funnels (focused on increasing numbers.)",
-      media: "/assets/FeaturePhotos/2.png",
-      mediaType: "image",
-      label: "prev product @ penseum"
-    },
-    {
-      id: 2,
-      content: "I won 10 consecutive hackathons and case competitions by typing fast and building out cool ideas targted at solving a problem.",
-      media: "/assets/FeaturePhotos/3.png",
-      mediaType: "image",
-      label: "10x hackathon winner"
-    },
-    {
-      id: 3,
-      content: "NYT Games start my morning workflow, so I thought, why not build one myself! Converted 100k+ impressions on social media- > 10k unique visits, and ",
-      linkText: "here's what I did next",
-      linkUrl: "/projects/onthedot",
-      media: "/assets/FeaturePhotos/4.mp4",
-      mediaType: "video",
-      label: "shipped a game to 3k users in < 1 week"
-    },
-    {
-      id: 4,
-      content: "Didn't like the existing math events, so I campaigned, won, and pushed my own ideas to 9000+ happy math students.",
-      media: "/assets/FeaturePhotos/5.png",
-      mediaType: "image",
-      label: "math faculty rep"
-    },
-    {
-      id: 5,
-      content: "A photo from our intramural ultimate frisbee championship. I love to play and talk sports, especially football (soccer), basketball, and table tennis!",
-      media: "/assets/FeaturePhotos/6.png",
-      mediaType: "image",
-      label: "very athletic"
-    }
-  ];
-  
-  useEffect(() => {
-    const mediaFiles = [
-      '/assets/FeaturePhotos/1.png',
-      '/assets/FeaturePhotos/2.png',
-      '/assets/FeaturePhotos/3.png',
-      '/assets/FeaturePhotos/4.mp4',
-      '/assets/FeaturePhotos/5.png',
-      '/assets/FeaturePhotos/6.png'
-    ];
-
-    mediaFiles.forEach(src => {
-      if (src.endsWith('.mp4')) {
-        const video = document.createElement('video');
-        video.src = src;
-        video.preload = 'auto';
-      } else {
-        const img = new Image();
-        img.src = src;
-      }
-    });
-  }, []);
-  
   return (
-    <div style={{ 
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100vw',
-      height: '100vh',
-        backgroundImage: `
-          linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px)
-        `,
-      backgroundSize: '20px 20px',
-      backgroundPosition: '0 0, 0 0',
-      zIndex: 0,
-      pointerEvents: 'none'
-    }}>
-      <div style={{ 
-        position: 'relative',
-        zIndex: 1,
-        height: '100vh', 
-        display: 'flex',
-        flexDirection: 'column',
-        pointerEvents: 'auto'
-      }}>
-        <div className="nav-wrapper" style={{ 
-          padding: windowWidth <= 480 ? '1rem 0.75rem' : windowWidth <= 768 ? '1.5rem 1rem' : '2rem 2rem 1rem 2rem',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: 1
-        }}>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '3rem',
-            padding: '0.5rem 0', 
-            width: '100%',
-            maxWidth: '36rem'
-          }}>
-            <ul style={{ 
-              display: 'flex', 
-              gap: '0.5rem', 
-              listStyle: 'none', 
-              padding: 0, 
-              margin: 0, 
-              fontWeight: 'bold',
-              flexWrap: 'wrap',
-              justifyContent: 'center'
-            }}>
-              <li>
-                <NavLink to="/" style={({ isActive }) => ({ 
-                  color: '#1a1a1a', 
-                  textDecoration: isActive ? 'underline' : 'none',
-                  textDecorationColor: isActive ? 'rgba(139, 92, 246, 0.4)' : 'transparent',
-                  textDecorationThickness: isActive ? '1px' : '0px',
-                  textUnderlineOffset: isActive ? '6px' : '0px',
-                  fontFamily: 'Libre Baskerville, serif',
-                  fontWeight: 'normal',
-                  letterSpacing: '0.1em'
-                })}>
-                  home
-                </NavLink>
-              </li>
-              <li style={{ color: '#1a1a1a', fontFamily: 'Libre Baskerville, serif', fontWeight: 'normal' }}>/</li>
-              <li>
-                <NavLink to="/projects" style={({ isActive }) => ({ 
-                  color: '#1a1a1a', 
-                  textDecoration: isActive ? 'underline' : 'none',
-                  textDecorationColor: isActive ? 'rgba(139, 92, 246, 0.4)' : 'transparent',
-                  textDecorationThickness: isActive ? '1px' : '0px',
-                  textUnderlineOffset: isActive ? '6px' : '0px',
-                  fontFamily: 'Libre Baskerville, serif',
-                  fontWeight: 'normal',
-                  letterSpacing: '0.1em'
-                })}>
-                  projects
-                </NavLink>
-              </li>
-              <li style={{ color: '#1a1a1a', fontFamily: 'Libre Baskerville, serif', fontWeight: 'normal' }}>/</li>
-              <li>
-                <NavLink to="/writing" style={({ isActive }) => ({ 
-                  color: '#1a1a1a', 
-                  textDecoration: isActive ? 'underline' : 'none',
-                  textDecorationColor: isActive ? 'rgba(139, 92, 246, 0.4)' : 'transparent',
-                  textDecorationThickness: isActive ? '1px' : '0px',
-                  textUnderlineOffset: isActive ? '6px' : '0px',
-                  fontFamily: 'Libre Baskerville, serif',
-                  fontWeight: 'normal',
-                  letterSpacing: '0.1em'
-                })}>
-                  writing
-                </NavLink>
-              </li>
-            </ul>
+    <div className="home-page">
+      <NavBar />
+
+      <main className="home-container">
+        <section className="hero-section">
+          <h1 className="hero-name">Hi, I'm Daniel</h1>
+          <p className="hero-subtitle">Computing & Financial Management @ UWaterloo</p>
+          <p className="hero-bio">
+            I build products people use and ideas that spread. I've won 10 hackathons, shipped a
+            trivia game to 3k users in under a week, and worked as a Product Engineering Intern. I
+            love moving fast, competing, and making things that matter.
+          </p>
+          <div className="social-row">
+            <a
+              href="https://linkedin.com/in/dnlwu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon-link"
+            >
+              <Linkedin size={20} />
+            </a>
+            <a
+              href="https://x.com/dnl_wu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon-link"
+            >
+              <Twitter size={20} />
+            </a>
+            <a
+              href="https://github.com/dnl-wu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon-link"
+            >
+              <Github size={20} />
+            </a>
+            <a href="mailto:daniel.wu@uwaterloo.ca" className="social-icon-link">
+              <Mail size={20} />
+            </a>
           </div>
-        </div>
+        </section>
 
-        <div className="main-content" style={{ 
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: windowWidth <= 480 ? '0 0.75rem' : windowWidth <= 768 ? '0 1rem' : 0,
-          margin: 0,
-          position: 'relative',
-          marginTop: windowWidth <= 480 ? '0' : windowWidth <= 768 ? '-1rem' : '-2rem'
-        }}>
-          <div style={{
-            position: 'relative',
-            textAlign: 'center',
-            userSelect: 'none',
-            WebkitUserSelect: 'none',
-            MozUserSelect: 'none',
-            msUserSelect: 'none',
-            marginTop: windowWidth <= 480 ? '0' : windowWidth <= 768 ? '-2rem' : '-5rem'
-          }}>
-            {activeCardId !== null && (
-              <div style={{
-                position: 'relative',
-                marginBottom: '2rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0'
-              }}>
-                <button
-                  className="carousel-btn"
-                  onClick={() => setActiveCardId(getPrevCardId(activeCardId))}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    borderRadius: '50%',
-                    width: windowWidth <= 480 ? '36px' : windowWidth <= 768 ? '40px' : '48px',
-                    height: windowWidth <= 480 ? '36px' : windowWidth <= 768 ? '40px' : '48px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    marginRight: windowWidth <= 480 ? '0.5rem' : '1rem',
-                    opacity: 0.6,
-                    zIndex: 3
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = '1';
-                    e.currentTarget.style.transform = 'scale(1.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = '0.6';
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                >
-                  <ChevronLeft size={24} strokeWidth={3} style={{ color: '#8B5CF6' }} />
-                </button>
-
-                <div 
-                  className="feature-card carousel-side-card" 
-                  style={{ 
-                    opacity: windowWidth <= 768 ? 0 : 0.4, 
-                    transform: 'scale(0.85)',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    zIndex: 1,
-                    marginRight: getCardMargin(),
-                    display: windowWidth <= 768 ? 'none' : 'block'
-                  }}
-                  onClick={() => setActiveCardId(getPrevCardId(activeCardId))}
-                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.6'}
-                  onMouseLeave={(e) => e.currentTarget.style.opacity = '0.4'}
-                >
-                  <div className="feature-content">
-                    {featureCards[getPrevCardId(activeCardId)].media && (
-                      <div className="feature-media" style={{ marginBottom: 0 }}>
-                        {featureCards[getPrevCardId(activeCardId)].mediaType === 'video' ? (
-                          <video 
-                            src={featureCards[getPrevCardId(activeCardId)].media} 
-                            autoPlay 
-                            loop 
-                            muted 
-                            playsInline
-                            className="feature-media-element"
-                          />
-                        ) : (
-                          <img 
-                            src={featureCards[getPrevCardId(activeCardId)].media} 
-                            alt="" 
-                            className="feature-media-element"
-                          />
-                        )}
-                      </div>
-                    )}
-                  </div>
+        <section className="experience-section">
+          <h2 className="section-heading">Experience</h2>
+          <div className="experience-list">
+            {experiences.map((exp) => (
+              <div className="experience-item" key={exp.id}>
+                <a href={exp.url} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={exp.logo}
+                    alt={exp.company}
+                    className="experience-logo"
+                  />
+                </a>
+                <div className="experience-body">
+                  <p className="experience-company">
+                    <a href={exp.url} target="_blank" rel="noopener noreferrer" className="experience-company-link">
+                      {exp.company}
+                    </a>
+                  </p>
+                  <p className="experience-role">{exp.role}</p>
+                  {exp.description && (
+                    <p className="experience-description">{exp.description}</p>
+                  )}
                 </div>
-
-                <div className="feature-card" style={{ transition: 'all 0.3s ease', zIndex: 2, position: 'relative' }}>
-                  <div className="feature-content">
-                    {featureCards[activeCardId].media && (
-                      <div className="feature-media" style={{ 
-                        border: '2px solid rgba(139, 92, 246, 0.3)',
-                        boxShadow: '0 0 8px rgba(139, 92, 246, 0.2)'
-                      }}>
-                        {featureCards[activeCardId].mediaType === 'video' ? (
-                          <video 
-                            src={featureCards[activeCardId].media} 
-                            autoPlay 
-                            loop 
-                            muted 
-                            playsInline
-                            className="feature-media-element"
-                          />
-                        ) : (
-                          <img 
-                            src={featureCards[activeCardId].media} 
-                            alt="" 
-                            className="feature-media-element"
-                          />
-                        )}
-                      </div>
-                    )}
-                    {renderCardContent(featureCards[activeCardId])}
-                  </div>
-                </div>
-
-                <div 
-                  className="feature-card carousel-side-card" 
-                  style={{ 
-                    opacity: windowWidth <= 768 ? 0 : 0.4, 
-                    transform: 'scale(0.85)',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    zIndex: 1,
-                    marginLeft: getCardMargin(),
-                    display: windowWidth <= 768 ? 'none' : 'block'
-                  }}
-                  onClick={() => setActiveCardId(getNextCardId(activeCardId))}
-                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.6'}
-                  onMouseLeave={(e) => e.currentTarget.style.opacity = '0.4'}
-                >
-                  <div className="feature-content">
-                    {featureCards[getNextCardId(activeCardId)].media && (
-                      <div className="feature-media" style={{ marginBottom: 0 }}>
-                        {featureCards[getNextCardId(activeCardId)].mediaType === 'video' ? (
-                          <video 
-                            src={featureCards[getNextCardId(activeCardId)].media} 
-                            autoPlay 
-                            loop 
-                            muted 
-                            playsInline
-                            className="feature-media-element"
-                          />
-                        ) : (
-                          <img 
-                            src={featureCards[getNextCardId(activeCardId)].media} 
-                            alt="" 
-                            className="feature-media-element"
-                          />
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <button
-                  className="carousel-btn"
-                  onClick={() => setActiveCardId(getNextCardId(activeCardId))}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    borderRadius: '50%',
-                    width: windowWidth <= 480 ? '36px' : windowWidth <= 768 ? '40px' : '48px',
-                    height: windowWidth <= 480 ? '36px' : windowWidth <= 768 ? '40px' : '48px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    marginLeft: windowWidth <= 480 ? '0.5rem' : '1rem',
-                    opacity: 0.6,
-                    zIndex: 3
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = '1';
-                    e.currentTarget.style.transform = 'scale(1.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = '0.6';
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                >
-                  <ChevronRight size={24} strokeWidth={3} style={{ color: '#8B5CF6' }} />
-                </button>
+                <p className="experience-dates">{exp.dates}</p>
               </div>
-            )}
-
-            <h1 className="home-hero-title" style={{
-              fontSize: windowWidth <= 480 ? '2rem' : windowWidth <= 768 ? '2.5rem' : '4rem',
-              fontWeight: 'bold',
-              fontFamily: 'Libre Baskerville, serif',
-              color: '#1a1a1a',
-              margin: 0,
-              padding: 0,
-              letterSpacing: windowWidth <= 480 ? '0.05em' : '0.1em',
-              textShadow: '0 0 20px rgba(139, 92, 246, 0.2)',
-              userSelect: 'none',
-              WebkitUserSelect: 'none',
-              MozUserSelect: 'none',
-              msUserSelect: 'none',
-              position: 'relative'
-            }}>
-              Daniel Wu
-            </h1>
-
-            <div style={{
-              marginTop: '1.5rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.75rem',
-              alignItems: 'center',
-                position: 'relative'
-            }}>
-              <div className="home-feature-row" style={{
-                display: 'flex',
-                gap: windowWidth <= 480 ? '0.5rem' : windowWidth <= 768 ? '0.75rem' : '2rem',
-                alignItems: 'center',
-                flexDirection: windowWidth <= 768 ? 'column' : 'row'
-              }}>
-                <FeatureCard 
-                  cardId={0}
-                  isActive={activeCardId === 0}
-                  onClick={() => setActiveCardId(0)}
-                >
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: '#1a1a1a',
-                    fontFamily: 'Libre Baskerville, serif',
-                    fontSize: '0.9rem',
-                    fontWeight: 'normal',
-                    cursor: 'pointer'
-                  }}>
-                    <Sparkle size={16} style={{ color: '#8B5CF6', opacity: activeCardId === 0 ? 1 : 0.7 }} />
-                    <span>2a cs + finance @ uwaterloo</span>
-                  </div>
-                </FeatureCard>
-                
-                <FeatureCard 
-                  cardId={1}
-                  isActive={activeCardId === 1}
-                  onClick={() => setActiveCardId(1)}
-                >
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: '#1a1a1a',
-                    fontFamily: 'Libre Baskerville, serif',
-                    fontSize: '0.9rem',
-                    fontWeight: 'normal',
-                    cursor: 'pointer'
-                  }}>
-                    <Sparkle size={16} style={{ color: '#8B5CF6', opacity: activeCardId === 1 ? 1 : 0.7 }} />
-                    <span>prev product @ penseum</span>
-                  </div>
-                </FeatureCard>
-                
-                <FeatureCard 
-                  cardId={2}
-                  isActive={activeCardId === 2}
-                  onClick={() => setActiveCardId(2)}
-                >
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: '#1a1a1a',
-                    fontFamily: 'Libre Baskerville, serif',
-                    fontSize: '0.9rem',
-                    fontWeight: 'normal',
-                    cursor: 'pointer'
-                  }}>
-                    <Sparkle size={16} style={{ color: '#8B5CF6', opacity: activeCardId === 2 ? 1 : 0.7 }} />
-                    <span>10x hackathon winner</span>
-                  </div>
-                </FeatureCard>
-              </div>
-
-              <div className="home-feature-row" style={{
-                display: 'flex',
-                gap: windowWidth <= 480 ? '0.5rem' : windowWidth <= 768 ? '0.75rem' : '2rem',
-                alignItems: 'center',
-                flexDirection: windowWidth <= 768 ? 'column' : 'row'
-              }}>
-                <FeatureCard 
-                  cardId={3}
-                  isActive={activeCardId === 3}
-                  onClick={() => setActiveCardId(3)}
-                >
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: '#1a1a1a',
-                    fontFamily: 'Libre Baskerville, serif',
-                    fontSize: '0.9rem',
-                    fontWeight: 'normal',
-                    cursor: 'pointer'
-                  }}>
-                    <Sparkle size={16} style={{ color: '#8B5CF6', opacity: activeCardId === 3 ? 1 : 0.7 }} />
-                    <span>shipped a game to 3k users in &lt; 1 week</span>
-                  </div>
-                </FeatureCard>
-                
-                <FeatureCard 
-                  cardId={4}
-                  isActive={activeCardId === 4}
-                  onClick={() => setActiveCardId(4)}
-                >
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: '#1a1a1a',
-                    fontFamily: 'Libre Baskerville, serif',
-                    fontSize: '0.9rem',
-                    fontWeight: 'normal',
-                    cursor: 'pointer'
-                  }}>
-                    <Sparkle size={16} style={{ color: '#8B5CF6', opacity: activeCardId === 4 ? 1 : 0.7 }} />
-                    <span>math faculty rep</span>
-                  </div>
-                </FeatureCard>
-                
-                <FeatureCard 
-                  cardId={5}
-                  isActive={activeCardId === 5}
-                  onClick={() => setActiveCardId(5)}
-                >
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: '#1a1a1a',
-                    fontFamily: 'Libre Baskerville, serif',
-                    fontSize: '0.9rem',
-                    fontWeight: 'normal',
-                    cursor: 'pointer'
-                  }}>
-                    <Sparkle size={16} style={{ color: '#8B5CF6', opacity: activeCardId === 5 ? 1 : 0.7 }} />
-                    <span>very athletic</span>
-                  </div>
-                </FeatureCard>
-              </div>
-            </div>
-
-            <div className="home-social-links" style={{ 
-              marginTop: windowWidth <= 480 ? '1.5rem' : '2rem',
-              display: 'flex', 
-              gap: windowWidth <= 480 ? '1rem' : windowWidth <= 768 ? '1.25rem' : '1.5rem', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              position: 'relative'
-            }}>
-              <a 
-                href="https://linkedin.com/in/dnlwu" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                style={{ 
-                  color: '#1a1a1a',
-                  cursor: 'pointer',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  MozUserSelect: 'none',
-                  msUserSelect: 'none',
-                  textDecoration: 'none',
-                  display: 'inline-block',
-                  transition: 'color 0.2s ease'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#8B5CF6'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#1a1a1a'}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  window.open('https://linkedin.com/in/dnlwu', '_blank');
-                }}
-              >
-                <Linkedin size={24} />
-              </a>
-              <a 
-                href="https://x.com/dnl_wu" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                style={{ 
-                  color: '#1a1a1a',
-                  cursor: 'pointer',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  MozUserSelect: 'none',
-                  msUserSelect: 'none',
-                  textDecoration: 'none',
-                  display: 'inline-block',
-                  transition: 'color 0.2s ease'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#8B5CF6'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#1a1a1a'}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  window.open('https://x.com/dnl_wu', '_blank');
-                }}
-              >
-                <Twitter size={24} />
-              </a>
-              <a 
-                href="https://github.com/dnl-wu" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                style={{ 
-                  color: '#1a1a1a',
-                  cursor: 'pointer',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  MozUserSelect: 'none',
-                  msUserSelect: 'none',
-                  textDecoration: 'none',
-                  display: 'inline-block',
-                  transition: 'color 0.2s ease'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#8B5CF6'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#1a1a1a'}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  window.open('https://github.com/dnl-wu', '_blank');
-                }}
-              >
-                <Github size={24} />
-              </a>
-              <a 
-                href="mailto:daniel.wu@uwaterloo.ca" 
-                style={{ 
-                  color: '#1a1a1a',
-                  cursor: 'pointer',
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  MozUserSelect: 'none',
-                  msUserSelect: 'none',
-                  textDecoration: 'none',
-                  display: 'inline-block',
-                  transition: 'color 0.2s ease'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#8B5CF6'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#1a1a1a'}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  window.open('mailto:daniel.wu@uwaterloo.ca', '_blank');
-                }}
-              > 
-                <Mail size={24} />
-              </a>
-            </div>
+            ))}
           </div>
-        </div>
+        </section>
 
-      </div>
+        <section className="highlights-section">
+          <div className="highlights-grid">
+            {featureCards.map((card) => (
+              <div className="highlight-card" key={card.id}>
+                {card.media && (
+                  <div className="highlight-media">
+                    {card.mediaType === 'video' ? (
+                      <video
+                        src={card.media}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="highlight-img"
+                      />
+                    ) : (
+                      <img src={card.media} alt={card.label} className="highlight-img" />
+                    )}
+                  </div>
+                )}
+                <div className="highlight-body">
+                  <span className="highlight-badge">{card.label}</span>
+                  <p className="highlight-text">
+                    {card.content}
+                    {card.linkText && card.linkUrl && (
+                      <Link to={card.linkUrl} className="highlight-link">
+                        {card.linkText}
+                      </Link>
+                    )}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer className="home-footer">
+        <p>
+          Found me interesting?{' '}
+          <a href="mailto:daniel.wu@uwaterloo.ca" className="footer-link">
+            daniel.wu@uwaterloo.ca
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }

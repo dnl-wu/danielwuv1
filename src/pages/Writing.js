@@ -1,88 +1,38 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import NavBar from '../components/NavBar/NavBar';
 import './Writing.css';
 
+const posts = [
+  {
+    title: 'On The Dot — Shipping a trivia game to 3000 users in < 1 week',
+    slug: 'onthedot',
+  },
+  {
+    title: 'LivePlay — Building real-time fan interaction into live sporting events',
+    slug: 'liveplay',
+  },
+];
+
 function Writing() {
-  const posts = [
-    {
-      title: "On The Dot - Shipping a trivia game to 3000 users in < 1 week",
-      slug: "onthedot"
-    },
-    {
-      title: "LivePlay - Building real-time fan interaction into live suporting events",
-      slug: "liveplay"
-    }
-  ];
-
   return (
-    <div className="writing-container">
-      <div className="writing-nav">
-        <div className="writing-nav-content">
-          <ul className="writing-nav-list">
-            <li>
-              <NavLink to="/" style={({ isActive }) => ({ 
-                color: '#1a1a1a', 
-                textDecoration: isActive ? 'underline' : 'none',
-                textDecorationColor: isActive ? 'rgba(139, 92, 246, 0.4)' : 'transparent',
-                textDecorationThickness: isActive ? '1px' : '0px',
-                textUnderlineOffset: isActive ? '6px' : '0px',
-                fontFamily: 'Libre Baskerville, serif',
-                fontWeight: 'normal',
-                letterSpacing: '0.1em'
-              })}>
-                home
-              </NavLink>
-            </li>
-            <li style={{ color: '#1a1a1a', fontFamily: 'Libre Baskerville, serif', fontWeight: 'normal' }}>/</li>
-            <li>
-              <NavLink to="/projects" style={({ isActive }) => ({ 
-                color: '#1a1a1a', 
-                textDecoration: isActive ? 'underline' : 'none',
-                textDecorationColor: isActive ? 'rgba(139, 92, 246, 0.4)' : 'transparent',
-                textDecorationThickness: isActive ? '1px' : '0px',
-                textUnderlineOffset: isActive ? '6px' : '0px',
-                fontFamily: 'Libre Baskerville, serif',
-                fontWeight: 'normal',
-                letterSpacing: '0.1em'
-              })}>
-                projects
-              </NavLink>
-            </li>
-            <li style={{ color: '#1a1a1a', fontFamily: 'Libre Baskerville, serif', fontWeight: 'normal' }}>/</li>
-            <li>
-              <NavLink to="/writing" style={({ isActive }) => ({ 
-                color: '#1a1a1a', 
-                textDecoration: isActive ? 'underline' : 'none',
-                textDecorationColor: isActive ? 'rgba(139, 92, 246, 0.4)' : 'transparent',
-                textDecorationThickness: isActive ? '1px' : '0px',
-                textUnderlineOffset: isActive ? '6px' : '0px',
-                fontFamily: 'Libre Baskerville, serif',
-                fontWeight: 'normal',
-                letterSpacing: '0.1em'
-              })}>
-                writing
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="writing-main">
-        <ul className="writing-posts-list">
+    <div className="writing-page">
+      <NavBar />
+      <main className="writing-container">
+        <h1 className="writing-heading">Writing</h1>
+        <p className="writing-subheading">Case studies and stories.</p>
+        <ul className="writing-list">
           {posts.map(({ title, slug }) => (
-            <li key={slug} className="writing-post-item">
-              <Link 
-                to={`/projects/${slug}`}
-                className="writing-post-link"
-              >
-                {title}
-                <ExternalLink size={16} style={{ flexShrink: 0 }} />
+            <li key={slug} className="writing-item">
+              <Link to={`/projects/${slug}`} className="writing-link">
+                <span>{title}</span>
+                <ArrowRight size={16} className="writing-arrow" />
               </Link>
             </li>
           ))}
         </ul>
-      </div>
+      </main>
     </div>
   );
 }
