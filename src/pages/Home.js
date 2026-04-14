@@ -111,7 +111,7 @@ function Home() {
               <Linkedin size={20} />
             </a>
             <a
-              href="https://x.com/dnl_wu"
+              href="https://x.com/dnlwu_"
               target="_blank"
               rel="noopener noreferrer"
               className="social-icon-link"
