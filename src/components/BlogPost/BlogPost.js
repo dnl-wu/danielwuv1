@@ -47,18 +47,18 @@ function BlogPost({ markdownPath }) {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
-                h2: ({ node, ...props }) => <h2 className="blog-post-h2" {...props} />,
-                h3: ({ node, ...props }) => <h3 className="blog-post-h3" {...props} />,
-                p: ({ node, ...props }) => <p className="blog-post-p" {...props} />,
-                a: ({ node, ...props }) => <a className="blog-post-link" {...props} />,
-                code: ({ node, inline, ...props }) =>
+                h2: ({ node, children, ...props }) => <h2 className="blog-post-h2" {...props}>{children}</h2>,
+                h3: ({ node, children, ...props }) => <h3 className="blog-post-h3" {...props}>{children}</h3>,
+                p: ({ node, children, ...props }) => <p className="blog-post-p" {...props}>{children}</p>,
+                a: ({ node, children, ...props }) => <a className="blog-post-link" {...props}>{children}</a>,
+                code: ({ node, inline, children, ...props }) =>
                   inline ? (
-                    <code className="blog-post-code-inline" {...props} />
+                    <code className="blog-post-code-inline" {...props}>{children}</code>
                   ) : (
-                    <code {...props} />
+                    <code {...props}>{children}</code>
                   ),
-                ul: ({ node, ...props }) => <ul className="blog-post-ul" {...props} />,
-                ol: ({ node, ...props }) => <ol className="blog-post-ol" {...props} />,
+                ul: ({ node, children, ...props }) => <ul className="blog-post-ul" {...props}>{children}</ul>,
+                ol: ({ node, children, ...props }) => <ol className="blog-post-ol" {...props}>{children}</ol>,
               }}
             >
               {content}
