@@ -200,7 +200,7 @@ function Home() {
 
       <footer className="home-footer">
         <p>
-          Found me interesting?{' '}
+          Get in touch:{' '}
           <a href="mailto:daniel.wu@uwaterloo.ca" className="footer-link">
             daniel.wu@uwaterloo.ca
           </a>
