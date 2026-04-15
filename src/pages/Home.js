@@ -97,9 +97,8 @@ function Home() {
           <h1 className="hero-name">Hi, I'm Daniel</h1>
           <p className="hero-subtitle"><span className="hero-pill">›  Seeking Summer 2026 Internships!</span></p>
           <p className="hero-bio">
-            I build products people use and ideas that spread. I've won 10 hackathons, shipped a
-            trivia game to 3k users in under a week, and worked as a Product Engineering Intern. I
-            love moving fast, competing, and making things that matter.
+            I am a product engineer.<br />
+            I love building cool things!
           </p>
           <div className="social-row">
             <a
