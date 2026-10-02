@@ -1,0 +1,16 @@
+---
+// A classic raised card for the "what I do" summary on the home page,
+// with the copyright line and social icons along the bottom.
+import Copyright from './Copyright.astro';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<div class="rounded-xl bg-card px-5 pt-4 pb-3 shadow-card backdrop-blur-xl">
+  <div class="space-y-0.5 text-[17px] leading-relaxed text-ink">
+    <slot />
+  </div>
+  <div class="-mr-2 mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+    <Copyright />
+    <SocialIcons />
+  </div>
+</div>

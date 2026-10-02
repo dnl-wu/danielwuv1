@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageTitle from '../../components/PageTitle.astro';
+import PostItem from '../../components/PostItem.astro';
+import { getProjects, projectHref, type Project } from '../../lib/content';
+
+const projects = await getProjects();
+
+// Case studies are labelled; outside links (live site, Devpost, GitHub) show just the ↗ arrow.
+function action({ data }: Project) {
+  if (data.featured) return 'Case study';
+}
+---
+
+<BaseLayout title="Projects" description="Things I’ve built.">
+  <PageTitle title="Projects" intro="Things I’ve built, mostly because I wanted them to exist." />
+  <ul class="mt-8 divide-y divide-rule">
+    {
+      projects.map((project) => (
+        <PostItem
+          title={project.data.title}
+          href={projectHref(project)}
+          external={!project.data.featured}
+          subtitle={project.data.summary}
+          action={action(project)}
+          status={project.data.status}
+        />
+      ))
+    }
+  </ul>
+</BaseLayout>

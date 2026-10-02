@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageTitle from '../components/PageTitle.astro';
+---
+
+<BaseLayout title="Not found">
+  <PageTitle title="Not found" />
+  <p class="mt-5 text-ink-soft">
+    This page doesn’t exist.
+    Try the <a class="link" href="/">home page</a>, <a class="link" href="/projects">projects</a>, or
+    <a class="link" href="/writing">writing</a>.
+  </p>
+</BaseLayout>

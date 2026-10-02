@@ -1,0 +1,41 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects, type Project } from '../../lib/content';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects
+    .filter((project) => project.data.featured)
+    .map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const { title, summary, role, metric, links } = project.data;
+const { Content } = await render(project);
+const meta = [role, metric].filter(Boolean).join(' · ');
+---
+
+<BaseLayout title={title} description={summary} type="article">
+  <article>
+    <a href="/projects" class="hl -my-1.5 inline-block rounded-sm py-1.5 text-sm text-muted">← Projects</a>
+    <h1 class="display mt-6 text-[2.4rem] leading-[1.05] text-balance">{title}</h1>
+    <p class="mt-3 text-lg leading-snug text-muted">{summary}</p>
+    <div class="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-y border-rule py-3 text-sm">
+      <span class="font-medium text-ink">{site.name}</span>
+      {meta && <span class="text-muted">{meta}</span>}
+      {
+        (links.demo || links.repo) && (
+          <span class="ml-auto flex gap-4">
+            {links.demo && <a class="link" href={links.demo} rel="noopener">Live ↗</a>}
+            {links.repo && <a class="link" href={links.repo} rel="noopener">Source ↗</a>}
+          </span>
+        )
+      }
+    </div>
+    <div class="prose prose-site mt-8 max-w-none">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

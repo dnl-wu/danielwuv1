@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageTitle from '../../components/PageTitle.astro';
+import PostItem from '../../components/PostItem.astro';
+import { getPosts, formatDate, postHref } from '../../lib/content';
+
+const posts = await getPosts();
+---
+
+<BaseLayout title="Writing" description="Notes on building, startups, and how I make decisions.">
+  <PageTitle title="Writing" intro="Notes on what I’m learning, from my decisions more than my outcomes." />
+  <ul class="mt-8 divide-y divide-rule">
+    {
+      posts.map((post) => (
+        <PostItem
+          title={post.data.title}
+          href={postHref(post)}
+          subtitle={post.data.summary}
+          action={post.data.project ? 'Case study' : undefined}
+          meta={post.data.date && [post.data.draft && 'Draft', formatDate(post.data.date, 'short')].filter(Boolean).join(' · ')}
+        />
+      ))
+    }
+  </ul>
+</BaseLayout>

@@ -1,0 +1,172 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Inter with its optical-size axis: large text automatically uses the tighter display cut. */
+@import '@fontsource-variable/inter/opsz.css';
+@import '@fontsource-variable/inter/opsz-italic.css';
+/* Serif for page headers, as on emma-x1.github.io. */
+@import '@fontsource/cormorant-garamond/700.css';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Design tokens — change the palette here. */
+:root {
+  --paper: #f2e9e4;
+  --ink: #0e0d0c;
+  --ink-soft: #2f2b28;
+  --muted: #786e64;
+  --rule: #d8cbc3;
+  /* Neon highlighter, used for one key phrase and link hovers. A shade darker than pure
+     neon so it sits on the warm paper instead of glowing over it. */
+  --highlight: #bff01f;
+  /* Softer lime for the current page in the nav: the highlight blended into the paper. */
+  --highlight-soft: #dbec8b;
+  /* macOS-style panel (intro box): translucent surface, hairline edge, barely-there shadow. */
+  --card: rgb(255 255 255 / 0.5);
+  --card-shadow: 0 0 0 0.5px rgb(60 40 30 / 0.14), 0 1px 2px rgb(60 40 30 / 0.04), 0 6px 16px -10px rgb(60 40 30 / 0.12);
+}
+:root[data-theme='dark'] {
+  --paper: #141312;
+  --ink: #f2ede8;
+  --ink-soft: #cfc7c0;
+  --muted: #9a8f85;
+  --rule: #34302c;
+  --highlight: #bff01f;
+  --highlight-soft: #8cae1b;
+  --card: rgb(255 255 255 / 0.04);
+  --card-shadow: inset 0 0.5px 0 rgb(255 255 255 / 0.08), 0 0 0 0.5px rgb(255 255 255 / 0.1), 0 6px 16px -10px rgb(0 0 0 / 0.5);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-highlight: var(--highlight);
+  --color-highlight-soft: var(--highlight-soft);
+  --color-card: var(--card);
+  --shadow-card: var(--card-shadow);
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', Garamond, Georgia, serif;
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    font-optical-sizing: auto;
+  }
+  html[data-theme='dark'] {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-paper font-sans text-[15px] leading-relaxed text-ink;
+  }
+  ::selection {
+    background: var(--highlight);
+    color: #000;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  mark {
+    background: var(--highlight);
+    color: #000;
+    padding: 0.05em 0.15em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+}
+
+/* Quiet link underline: soft grey at rest (30% ink), black on hover via the link styles. */
+@utility link-underline {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--ink) 30%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+@layer components {
+  /* Tight display type for the name and titles. */
+  .display {
+    @apply font-medium tracking-[-0.045em] text-ink;
+    line-height: 0.95;
+  }
+  /* Underlined link that lights up like a highlighter on hover. */
+  .link,
+  .letter a:not(.org, .icon-link) {
+    @apply link-underline text-ink transition-colors hover:bg-highlight hover:text-black hover:decoration-black;
+  }
+  /* Plain link (no underline) with the same highlighter hover. */
+  .hl {
+    @apply transition-colors hover:bg-highlight hover:text-black;
+  }
+}
+
+/* The home-page letter: plain paragraphs with inline links. */
+.letter > * + * {
+  margin-top: 1.1em;
+}
+
+/* Long-form prose (writing + project case studies). */
+.prose-site {
+  --tw-prose-body: var(--ink-soft);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-links: var(--ink);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-counters: var(--muted);
+  --tw-prose-bullets: var(--muted);
+  --tw-prose-hr: var(--rule);
+  --tw-prose-quotes: var(--ink);
+  --tw-prose-quote-borders: var(--ink);
+  --tw-prose-code: var(--ink);
+  --tw-prose-pre-bg: var(--rule);
+  --tw-prose-th-borders: var(--rule);
+  --tw-prose-td-borders: var(--rule);
+  font-size: 15px;
+  line-height: 1.75;
+}
+.prose-site :where(h2, h3) {
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.prose-site :where(a) {
+  text-decoration-color: color-mix(in srgb, var(--ink) 30%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  font-weight: inherit;
+}
+.prose-site :where(a):hover {
+  background: var(--highlight);
+  color: #000;
+  text-decoration-color: #000;
+}
+.prose-site :where(blockquote) {
+  font-weight: 400;
+}
+.prose-site :where(blockquote p)::before,
+.prose-site :where(blockquote p)::after,
+.prose-site :where(code):not(pre code)::before,
+.prose-site :where(code):not(pre code)::after {
+  content: none;
+}
+.prose-site :where(code):not(pre code) {
+  font-size: 0.875em;
+  background: var(--rule);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+/* Shiki dual themes */
+html[data-theme='dark'] .astro-code,
+html[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}

@@ -1,0 +1,13 @@
+---
+import { site } from '../data/site';
+
+const buildYear = new Date().getFullYear();
+---
+
+<p class="text-[13px] text-muted">© <span data-year>{buildYear}</span> {site.name}</p>
+
+<script>
+  // The build bakes in the year it ran; refresh it so the site never shows a stale year.
+  const year = String(new Date().getFullYear());
+  document.querySelectorAll('[data-year]').forEach((el) => (el.textContent = year));
+</script>

@@ -1,0 +1,57 @@
+---
+// One item in a quiet list: title with a right-aligned label, and a grey summary below.
+// The right-aligned labels form a single vertical edge down the column. The whole item is clickable.
+interface Props {
+  title: string;
+  href?: string;
+  external?: boolean;
+  subtitle?: string;
+  /** Plain right-aligned label, e.g. a date. */
+  meta?: string;
+  /** Right-aligned call to action styled as a link, e.g. "Case study". An arrow is added automatically;
+   *  external links without an action show just the ↗ arrow. */
+  action?: string;
+  /** Small neon label beside the title, e.g. "Building...". */
+  status?: string;
+}
+const { title, href, external = false, subtitle, meta, action, status } = Astro.props;
+---
+
+<li class="group relative py-5 first:pt-0">
+  <div class="flex items-baseline justify-between gap-6">
+    <h2 class="text-[17px] leading-snug font-medium tracking-[-0.01em] text-ink">
+      {
+        href ? (
+          <a
+            href={href}
+            {...(external && { rel: 'noopener' })}
+            class="rounded-sm transition-colors duration-200 [box-decoration-break:clone] after:absolute after:inset-0 group-hover:bg-highlight group-hover:text-black"
+          >
+            {title}
+          </a>
+        ) : (
+          title
+        )
+      }
+      {status && <span class="ml-2 inline-block rounded-full bg-highlight px-2 py-0.5 align-[0.12em] text-[11px] leading-none font-medium text-black">{status}</span>}
+    </h2>
+    {
+      href && (action || external) ? (
+        <span class="shrink-0 text-[13px] whitespace-nowrap text-ink" aria-hidden="true">
+          {action && <span class="link-underline mr-0.5 transition-[text-decoration-color] duration-200 group-hover:decoration-ink">{action}</span>}
+          <span
+            class:list={[
+              'inline-block transition-transform duration-200 ease-out',
+              external ? 'text-[15px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5' : 'group-hover:translate-x-0.5',
+            ]}
+          >
+            {external ? '↗' : '→'}
+          </span>
+        </span>
+      ) : (
+        meta && <span class="shrink-0 text-[13px] whitespace-nowrap text-muted tabular-nums">{meta}</span>
+      )
+    }
+  </div>
+  {subtitle && <p class="mt-1 max-w-[30rem] text-[14.5px] leading-[1.55] text-muted">{subtitle}</p>}
+</li>

@@ -1,0 +1,20 @@
+---
+// An organisation written as "@" + logo + name, inline with the text, optionally linked.
+// The "@", logo, and name never wrap apart.
+interface Props {
+  name: string;
+  /** Path to a logo in /public, e.g. "/logos/uwaterloo.svg". Leave out until you have one. */
+  logo?: string;
+  /** Extra classes for the logo, e.g. "rounded-[4px]" for square app-icon style logos. */
+  logoClass?: string;
+  href?: string;
+}
+const { name, logo, logoClass, href } = Astro.props;
+const Tag = href ? 'a' : 'span';
+---
+
+<span class="whitespace-nowrap">@<Tag
+    href={href}
+    rel={href ? 'noopener' : undefined}
+    class:list={['org group ml-1', href && 'hl rounded-sm']}
+  >{logo && <img src={logo} alt="" width="18" height="18" class:list={['mr-1 inline-block h-[1.05em] w-auto align-[-0.15em]', logoClass]} />}<span class:list={[href && 'link-underline group-hover:decoration-black']}>{name}</span></Tag></span>
